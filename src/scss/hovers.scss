@@ -1,0 +1,34 @@
+// Ховер з підкресленням
+._hover-link {
+	line-height: 1.2;
+	font-size: toRem(15.3);
+	&::after {
+		content: "";
+		display: block;
+		width: 100%;
+		background-color: blue;
+		height: toRem(1);
+		transform: scale(0);
+		transition: transform 0.3s;
+		margin-top: toRem(1);
+	}
+
+	&:hover {
+		&::after {
+			transform: scale(1);
+		}
+	}
+}
+
+//Ховер на багаторядковий текст
+._hover-bg-link {
+	text-decoration: none;
+	background: linear-gradient(to right, #b71c1c, #b71c1c) 0 100% / 0 2px no-repeat;
+	transition: all 0.3s;
+	display: inline;
+	@media (any-hover: hover) {
+		&:hover {
+			background-size: 100% 2px;
+		}
+	}
+}
