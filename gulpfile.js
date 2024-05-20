@@ -41,12 +41,17 @@ const fonts = gulp.series(reset, function (done) {
 		done();
 	}
 });
-// const fonts = gulp.series(reset, otfToTtf, ttfToWoff2, woff2Copy, fontsStyle);
 
 // Порядок виконання завдань для режиму розробник
 const devTasks = gulp.series(fonts, gitignore);
 // Порядок виконання завдань для режиму продакшн
-const buildTasks = gulp.series(fonts, jsDev, js, gulp.parallel(html, css, gulp.parallel(WebP, copySvg), gitignore));
+let buildTasks;
+if (process.argv.includes('--nowebp')) {
+	buildTasks = gulp.series(fonts, jsDev, js, gulp.parallel(html, css, gulp.parallel(WebP, imagesOptimize, copySvg), gitignore));
+} else {
+	buildTasks = gulp.series(fonts, jsDev, js, gulp.parallel(html, css, gulp.parallel(WebP, copySvg), gitignore));
+}
+
 
 // Експорт завдань
 export { html }

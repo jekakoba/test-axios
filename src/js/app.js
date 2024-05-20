@@ -36,7 +36,7 @@ import * as flsFunctions from "./files/functions.js";
 /* Додавання loaded для HTML після повного завантаження сторінки */
 // flsFunctions.addLoadedClass();
 /* Модуль для роботи з меню (Бургер) */
-// flsFunctions.menuInit();
+flsFunctions.menuInit();
 /* Форматування чисел */
 // import './libs/wNumb.min.js';
 
@@ -271,6 +271,9 @@ import "./files/axios.js";
 
 // Активний інпут
 import "./files/input-active.js";
+
+// Активний навігаційний пунтк меню
+// import "./files/active-navigation-link.js";
 // ========================================================================================================================================================================================================================================================
 /* Підключаємо файли зі своїм кодом */
 import "./files/script.js";

@@ -1,0 +1,25 @@
+.header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 999;
+	background-color: white;
+
+	// .header__container
+
+	&__container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: toRem(80);
+		@media (max-width: $mobile) {
+			justify-content: end;
+			min-height: toRem(50);
+		}
+	}
+
+	// .header__menu
+
+	&__menu {
+	}
+}

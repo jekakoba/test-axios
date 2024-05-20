@@ -1,3 +1,7 @@
+.page {
+	@include adaptiveValue("padding-top", 100, 80);
+}
+
 .page__container {
 	padding-top: toRem(30);
 	padding-bottom: toRem(30);
@@ -7,13 +11,16 @@
 	display: grid;
 	gap: toRem(30);
 	@media (min-width: toEm(601)) {
-		height: 100vh;
 		grid-template-columns: repeat(2, 1fr);
-		justify-content: center;
-		align-items: center;
 	}
 	@media (max-width: toEm(600)) {
 	}
 
 	// overflow-y: auto;
+}
+
+section {
+	&:not(:last-child) {
+		margin-bottom: toRem(250);
+	}
 }
