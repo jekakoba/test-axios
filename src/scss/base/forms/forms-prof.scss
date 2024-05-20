@@ -1,8 +1,9 @@
 .form {
 	position: relative;
-	@media (min-width: em(601)) {
+	@media (min-width: toEm(601)) {
 		max-width: toRem(800);
 	}
+
 	&::before {
 		content: "";
 		position: absolute;
