@@ -1,8 +1,10 @@
 import axios from "axios";
 import { flsModules } from "./modules.js"
+
 document.addEventListener('DOMContentLoaded', () => {
 	const forms = document.querySelectorAll('.form');
 	if (forms.length === 0) return;
+
 	forms.forEach(form => {
 		const formTitleInput = form.querySelector('[data-form-title]');
 		const nameInput = form.querySelector('[data-form-name]');
@@ -11,26 +13,49 @@ document.addEventListener('DOMContentLoaded', () => {
 		const formSendButton = form.querySelector('[data-form-send]');
 		let formData = {};
 		const requiredMask = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,8})+$/;
-		function validateForm() {
+
+		function validateForm(form, nameInput, emailInput, messageInput) {
 			const userNameValue = nameInput.value;
 			const userEmailValue = emailInput.value;
 			const userMessageValue = messageInput.value;
 			const subject = formTitleInput ? formTitleInput.value : '';
+
 			toggleErrorClass(nameInput, userNameValue.length === 0);
 			toggleErrorClass(emailInput, userEmailValue.length === 0 || !validateEmail(userEmailValue));
 			toggleErrorClass(messageInput, userMessageValue.length === 0);
+
 			if (userNameValue.length > 0 && userMessageValue.length > 0 && validateEmail(userEmailValue)) {
 				formData['name'] = userNameValue;
 				formData['email'] = userEmailValue;
 				formData['message'] = userMessageValue;
 				formData['mail-title'] = subject;
-				getMailTitle(formData);
-				chatSubmit(formData, [nameInput, emailInput, messageInput]);
+				getMailTitle(formData, form);
+				chatSubmit(formData, form, [nameInput, emailInput, messageInput]);
+
+			} else {
+				createErrorMessage(form)
 			}
 		}
+
 		function validateEmail(email) {
 			return requiredMask.test(email);
 		}
+
+		function createErrorMessage(form) {
+			if (form.querySelector('.form__error')) {
+				return;
+			}
+			const errorMessages = form.querySelectorAll('[data-error-message]');
+			errorMessages.forEach(errorElement => {
+				const errorMessage = errorElement.getAttribute('data-error-message');
+				const formLine = errorElement.closest('.form__line');
+				const errorBlock = document.createElement('div');
+				errorBlock.innerHTML = errorMessage;
+				errorBlock.classList.add('form__error');
+				formLine.appendChild(errorBlock);
+			});
+		}
+
 		function toggleErrorClass(element, condition) {
 			if (condition) {
 				element.parentElement.classList.add('_form-error');
@@ -38,12 +63,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				element.parentElement.classList.remove('_form-error');
 			}
 		}
-		function getMailTitle(targetArray) {
-			const emailSubject = document.querySelector('#subject');
+
+		function getMailTitle(targetArray, form) {
+			const emailSubject = form.querySelector('#subject');
 			const emailSubjectValue = emailSubject.value;
 			targetArray['subject'] = emailSubjectValue;
 		}
-		async function chatSubmit(currentData, inputsArr) {
+
+		async function chatSubmit(currentData, form, inputsArr) {
 			const formData = new FormData();
 			for (const [key, value] of Object.entries(currentData)) {
 				formData.append(key, value);
@@ -55,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 					input.value = '';
 				}
 				form ? form.classList.remove('_sending') : null;
+
 				const inputsActive = document.querySelectorAll('._input-active');
 				if (inputsActive.length > 0) inputsActive.forEach(input => input.classList.remove('_input-active'));
 			} catch (error) {
@@ -62,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 		if (formSendButton) {
-			formSendButton.addEventListener("click", validateForm);
+			formSendButton.addEventListener("click", () => validateForm(form, nameInput, emailInput, messageInput));
 		}
 	});
 });

@@ -64,6 +64,12 @@
 		}
 	}
 
+	&__error {
+		position: relative;
+		top: toRem(3);
+		color: red;
+	}
+
 	// .form__input
 
 	&__input {
