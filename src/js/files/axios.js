@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-		function getMailTitle(targetArray, form) {
-			const emailSubject = form.querySelector('#subject');
-			const emailSubjectValue = emailSubject.value;
-			targetArray['subject'] = emailSubjectValue;
+		function getMailTitle(targetArray) {
+			const emailSubject = document.querySelector('#subject')
+			const emailSubjectValue = emailSubject.value
+			targetArray['subject'] = emailSubjectValue
 		}
 
 		async function chatSubmit(currentData, form, inputsArr) {
