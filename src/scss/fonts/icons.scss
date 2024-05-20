@@ -13,3 +13,45 @@
 		@extend %ic;
 	}
 }
+
+._icon-mail:before {
+	content: "\e902";
+	color: #3872fe;
+}
+._icon-delete-search:before {
+	content: "\e901";
+}
+._icon-arrow-big:before {
+	content: "\e90c";
+}
+._icon-arrow:before {
+	content: "\e905";
+}
+._icon-arrow-back:before {
+	content: "\e900";
+}
+._icon-arrow-top:before {
+	content: "\e90a";
+}
+._icon-close-menu:before {
+	content: "\e90b";
+}
+._icon-location:before {
+	content: "\e903";
+}
+._icon-phone:before {
+	content: "\e904";
+	color: red;
+}
+._icon-search:before {
+	content: "\e906";
+}
+._icon-services:before {
+	content: "\e907";
+}
+._icon-spoller-arrow:before {
+	content: "\e908";
+}
+._icon-user:before {
+	content: "\e909";
+}
