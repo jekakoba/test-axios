@@ -30,25 +30,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		function validationFirstForm() {
 			if (firstFormName && firstFormEmail && firstFormMessage) {
-				const userFirstNameValue = firstFormName.value
-				const userFirstNameValueEmailValue = firstFormEmail.value
-				const userFirstNameValueMessage = firstFormMessage.value
-				const subjectFirstForm = firstFormTitle.value
+				const userFirstNameValue = firstFormName.value;
+				const userFirstNameValueEmailValue = firstFormEmail.value;
+				const userFirstNameValueMessage = firstFormMessage.value;
+				const subjectFirstForm = firstFormTitle ? firstFormTitle.value : '';
 
-				toggleErrorClass(firstFormName, userFirstNameValue.length === 0)
-				toggleErrorClass(firstFormEmail, userFirstNameValueEmailValue.length === 0 || !validateEmail(userFirstNameValueEmailValue))
-				toggleErrorClass(userFirstNameValueMessage, firstFormMessage.length === 0)
+				toggleErrorClass(firstFormName, userFirstNameValue.length === 0);
+				toggleErrorClass(firstFormEmail, userFirstNameValueEmailValue.length === 0 || !validateEmail(userFirstNameValueEmailValue));
+				toggleErrorClass(firstFormMessage, userFirstNameValueMessage.length === 0);
 
-				if (firstFormName && firstFormMessage && validateEmail(userFirstNameValueEmailValue)) {
-					dataFirstForm['name'] = userFirstNameValue
-					dataFirstForm['email'] = userFirstNameValueEmailValue
-					dataFirstForm['mail-title'] = subjectFirstForm
-					getMailTitle(dataFirstForm)
-					// if (formFooterMessage) {
-					// 	dataFirstForm['message'] = userFirstNameValueMessage
-					// }
+				if (userFirstNameValue.length > 0 && userFirstNameValueMessage.length > 0 && validateEmail(userFirstNameValueEmailValue)) {
+					dataFirstForm['name'] = userFirstNameValue;
+					dataFirstForm['email'] = userFirstNameValueEmailValue;
+					dataFirstForm['mail-title'] = subjectFirstForm;
+					getMailTitle(dataFirstForm);
 
-					chatSubmit(dataFirstForm, [firstFormName, firstFormEmail, firstFormMessage])
+					chatSubmit(dataFirstForm, [firstFormName, firstFormEmail, firstFormMessage]);
 				}
 			}
 		}
