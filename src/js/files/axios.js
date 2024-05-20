@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
 				const subjectFirstForm = firstFormTitle ? firstFormTitle.value : '';
 
 				toggleErrorClass(firstFormName, userFirstNameValue.length === 0);
-				toggleErrorClass(firstFormEmail, userFirstEmailValue.length === 0 || !validateEmail(userFirstNameValueEmailValue));
-				toggleErrorClass(firstFormMessage, userFirstNameValueMessage.length === 0);
+				toggleErrorClass(firstFormEmail, userFirstEmailValue.length === 0 || !validateEmail(userFirstEmailValue));
+				toggleErrorClass(firstFormMessage, userFirstMessageValue.length === 0);
 
 				if (userFirstNameValue.length > 0 && userFirstMessageValue.length > 0 && validateEmail(userFirstEmailValue)) {
 					dataFirstForm['name'] = userFirstNameValue;
