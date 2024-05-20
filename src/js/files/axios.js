@@ -82,11 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
 					input.value = ''
 				}
 				form ? form.classList.remove('_sending') : null
-
-				// const formLine = form.querySelector('.form__line')
 				const inputsActive = document.querySelectorAll('._input-active')
 				if (inputsActive.length > 0) inputsActive.forEach(input => input.classList.remove('_input-active'))
-				// if (formLine) formLine.classList.remove('_input-active')
 			} catch (error) {
 				form ? form.classList.remove('_sending') : null
 			}
