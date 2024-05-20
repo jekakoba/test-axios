@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	forms.forEach(form => {
 		// Заголовки форм
 		const firstFormTitle = form.querySelector('[data-first-form-title]')
-		// const secondFormTitle = form.querySelector('[data-second-form-title]')
+		const secondFormTitle = form.querySelector('[data-second-form-title]')
 
 		// Перша форма
 		const firstFormName = form.querySelector('[data-first-form-name]')
@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		const firstFormSend = form.querySelector('[data-first-form-send]')
 
 		// Друга  форма
-		// const secondFormName = form.querySelector('[data-second-form-name]')
-		// const secondFormEmail = form.querySelector('[data-second-form-email]')
-		// const secondFormMessage = form.querySelector('[data-second-form-message]')
-		// const secondFormSend = form.querySelector('[data-second-form-send]')
+		const secondFormName = form.querySelector('[data-second-form-name]')
+		const secondFormEmail = form.querySelector('[data-second-form-email]')
+		const secondFormMessage = form.querySelector('[data-second-form-message]')
+		const secondFormSend = form.querySelector('[data-second-form-send]')
 
 
 		// Валідація email
@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Масиви форм, куди йдуть зібрані дані
 		let dataFirstForm = []
+		let dataSecondForm = []
 
 
 		// Валідація форми
@@ -36,19 +37,36 @@ document.addEventListener('DOMContentLoaded', () => {
 				const userFirstEmailValue = firstFormEmail.value;
 				const userFirstMessageValue = firstFormMessage.value;
 				const subjectFirstForm = firstFormTitle ? firstFormTitle.value : '';
-
 				toggleErrorClass(firstFormName, userFirstNameValue.length === 0);
 				toggleErrorClass(firstFormEmail, userFirstEmailValue.length === 0 || !validateEmail(userFirstEmailValue));
 				toggleErrorClass(firstFormMessage, userFirstMessageValue.length === 0);
-
 				if (userFirstNameValue.length > 0 && userFirstMessageValue.length > 0 && validateEmail(userFirstEmailValue)) {
 					dataFirstForm['name'] = userFirstNameValue;
 					dataFirstForm['email'] = userFirstEmailValue;
 					dataFirstForm['message'] = userFirstMessageValue;
 					dataFirstForm['mail-title'] = subjectFirstForm;
 					getMailTitle(dataFirstForm);
-
 					chatSubmit(dataFirstForm, [firstFormName, firstFormEmail, firstFormMessage]);
+				}
+			}
+		}
+		function validationSecondForm() {
+			if (secondFormName && secondFormEmail && secondFormMessage) {
+				const userSecondNameValue = secondFormName.value;
+				const userSecondEmailValue = secondFormEmail.value;
+				const userSecondMessageValue = secondFormMessage.value;
+				const subjectSecondForm = secondFormTitle ? secondFormTitle.value : '';
+
+				toggleErrorClass(firstFormName, userSecondNameValue.length === 0);
+				toggleErrorClass(firstFormEmail, userSecondEmailValue.length === 0 || !validateEmail(userSecondEmailValue));
+				toggleErrorClass(firstFormMessage, userSecondMessageValue.length === 0);
+				if (userSecondNameValue.length > 0 && userSecondMessageValue.length > 0 && validateEmail(userSecondEmailValue)) {
+					dataSecondForm['name'] = userSecondNameValue;
+					dataSecondForm['email'] = userSecondMessageValue;
+					dataSecondForm['message'] = userFirstMessageValue;
+					dataSecondForm['mail-title'] = subjectSecondForm;
+					getMailTitle(dataSecondForm);
+					chatSubmit(dataSecondForm, [secondFormName, secondFormEmail, secondFormMessage]);
 				}
 			}
 		}
@@ -89,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 		if (firstFormSend) firstFormSend.addEventListener("click", validationFirstForm);
+		if (secondFormSend) secondFormSend.addEventListener("click", validationSecondForm);
 	});
 })
 
