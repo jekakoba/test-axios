@@ -24,24 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Валідація email
 		const requiredMask = /^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,8})+$/
+
+		// Масиви форм, куди йдуть зібрані дані
 		let dataFirstForm = []
 
 
-
+		// Валідація форми
 		function validationFirstForm() {
 			if (firstFormName && firstFormEmail && firstFormMessage) {
 				const userFirstNameValue = firstFormName.value;
-				const userFirstNameValueEmailValue = firstFormEmail.value;
-				const userFirstNameValueMessage = firstFormMessage.value;
+				const userFirstEmailValue = firstFormEmail.value;
+				const userFirstMessageValue = firstFormMessage.value;
 				const subjectFirstForm = firstFormTitle ? firstFormTitle.value : '';
 
 				toggleErrorClass(firstFormName, userFirstNameValue.length === 0);
-				toggleErrorClass(firstFormEmail, userFirstNameValueEmailValue.length === 0 || !validateEmail(userFirstNameValueEmailValue));
+				toggleErrorClass(firstFormEmail, userFirstEmailValue.length === 0 || !validateEmail(userFirstNameValueEmailValue));
 				toggleErrorClass(firstFormMessage, userFirstNameValueMessage.length === 0);
 
-				if (userFirstNameValue.length > 0 && userFirstNameValueMessage.length > 0 && validateEmail(userFirstNameValueEmailValue)) {
+				if (userFirstNameValue.length > 0 && userFirstMessageValue.length > 0 && validateEmail(userFirstEmailValue)) {
 					dataFirstForm['name'] = userFirstNameValue;
-					dataFirstForm['email'] = userFirstNameValueEmailValue;
+					dataFirstForm['email'] = userFirstEmailValue;
+					dataFirstForm['message'] = userFirstMessageValue;
 					dataFirstForm['mail-title'] = subjectFirstForm;
 					getMailTitle(dataFirstForm);
 
@@ -50,44 +53,39 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-
+		// Заголовок сторінки
 		function getMailTitle(targetArray) {
 			const emailSubject = document.querySelector('#subject')
 			const emailSubjectValue = emailSubject.value
 			targetArray['subject'] = emailSubjectValue
 		}
-
+		// Валідація Email
 		function validateEmail(email) {
 			return requiredMask.test(email)
 		}
-
+		// Додавання класу  _form-error для батька інпута 
 		function toggleErrorClass(element, condition) {
 			if (condition) { element.parentElement.classList.add('_form-error') }
 			else { element.parentElement.classList.remove('_form-error') }
 		}
 
-
+		// Відправка форми
 		async function chatSubmit(currentData, inputsArr) {
 			const formData = new FormData()
 			for (const [key, value] of Object.entries(currentData)) {
 				formData.append(key, value)
 			}
 			form ? form.classList.add('_sending') : null
-			// formPopup ? formPopup.classList.add('_sending') : null
 			try {
 				const response = await axios.post('../files/sendmail/sendmail.php', formData)
+				for (let input of inputsArr) {
+					input.value = ''
+				}
 				form ? form.classList.remove('_sending') : null
 				const formLine = form.querySelector('.form__line')
-				formLine.classList.remove('_input-active');
-				// formPopup ? formPopup.classList.remove('_sending') : null
-
-				// if (suceessSelectorPopup) {
-				// 	flsModules.popup.open(suceessSelectorPopup)
-				// }
+				if (formLine) formLine.classList.remove('_input-active')
 			} catch (error) {
 				form ? form.classList.remove('_sending') : null
-				// formPopup ? formPopup.classList.remove('_sending') : null
-				// console.error(error)
 			}
 		}
 		if (firstFormSend) firstFormSend.addEventListener("click", validationFirstForm);

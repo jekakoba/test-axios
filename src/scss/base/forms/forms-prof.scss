@@ -15,10 +15,10 @@
 		transition: all 0.3s;
 	}
 	&._sending {
+		pointer-events: none;
 		&::before {
-			opacity: 0;
+			opacity: 0.8;
 			visibility: visible;
-			pointer-events: none;
 		}
 	}
 	&__wrapper {
