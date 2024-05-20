@@ -9,12 +9,13 @@ textarea {
 	appearance: none;
 }
 .input {
-	border-radius: 0 !important;
+	border-radius: toRem(5) !important;
 	width: 100%;
 	display: block;
-	padding: 0px 20px;
-	border: 1px solid #eee;
+	padding: 0 toRem(15);
+	border: toRem(1) solid #eee;
 	caret-color: inherit;
+	height: toRem(30);
 	&._form-focus {
 	}
 	&._form-error {

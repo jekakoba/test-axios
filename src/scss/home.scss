@@ -1,2 +1,9 @@
-.page {
+.form-wrappers {
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: toRem(30);
+	height: 100vh;
+	justify-content: center;
+	align-items: center;
 }
