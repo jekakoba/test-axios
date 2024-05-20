@@ -27,32 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		let dataFirstForm = []
 
 
-		// Валідація форми в розділі КОНТАКТИ
-
-		// function validationFooterForm() {
-		// 	if (formFooterName && formFooterEmail && formFooterMessage) {
-		// 		const userFooterNameValue = formFooterName.value
-		// 		const userFooterEmailValue = formFooterEmail.value
-		// 		const userFooterMessage = formFooterMessage.value
-		// 		const userSubjectFormFooter = firstFormTitle.value
-
-		// 		toggleErrorClass(formFooterName, userFooterNameValue.length === 0)
-		// 		toggleErrorClass(formFooterEmail, userFooterEmailValue.length === 0 || !validateEmail(userFooterEmailValue))
-
-		// 		if (formFooterName && validateEmail(userFooterEmailValue)) {
-		// 			dataFooterForm['Name'] = userFooterNameValue
-		// 			dataFooterForm['Email'] = userFooterEmailValue
-		// 			dataFooterForm['mail-title'] = userSubjectFormFooter
-		// 			getMailTitle(dataFooterForm)
-		// 			if (formFooterMessage) {
-		// 				dataFooterForm['Message'] = userFooterMessage
-		// 			}
-
-		// 			chatSubmit(dataFooterForm, [formFooterName, formFooterEmail, formFooterMessage])
-		// 		}
-		// 	}
-		// }
-
 
 		function validationFirstForm() {
 			if (firstFormName && firstFormEmail && firstFormMessage) {
@@ -65,14 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				toggleErrorClass(firstFormEmail, userFirstNameValueEmailValue.length === 0 || !validateEmail(userFirstNameValueEmailValue))
 				toggleErrorClass(userFirstNameValueMessage, firstFormMessage.length === 0)
 
-				if (formFooterName && validateEmail(userFooterEmailValue)) {
-					dataFirstForm['Name'] = userFirstNameValue
-					dataFirstForm['Email'] = userFirstNameValueEmailValue
+				if (firstFormName && firstFormMessage && validateEmail(userFirstNameValueEmailValue)) {
+					dataFirstForm['name'] = userFirstNameValue
+					dataFirstForm['email'] = userFirstNameValueEmailValue
 					dataFirstForm['mail-title'] = subjectFirstForm
 					getMailTitle(dataFirstForm)
-					if (formFooterMessage) {
-						dataFirstForm['Message'] = userFirstNameValueMessage
-					}
+					// if (formFooterMessage) {
+					// 	dataFirstForm['message'] = userFirstNameValueMessage
+					// }
 
 					chatSubmit(dataFirstForm, [firstFormName, firstFormEmail, firstFormMessage])
 				}
@@ -80,11 +54,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 
 
-		// function getMailTitle(targetArray) {
-		// 	const emailSubject = document.querySelector('#subject')
-		// 	const emailSubjectValue = emailSubject.value
-		// 	targetArray['subject'] = emailSubjectValue
-		// }
+		function getMailTitle(targetArray) {
+			const emailSubject = document.querySelector('#subject')
+			const emailSubjectValue = emailSubject.value
+			targetArray['subject'] = emailSubjectValue
+		}
 
 		function validateEmail(email) {
 			return requiredMask.test(email)
