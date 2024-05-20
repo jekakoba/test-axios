@@ -1,6 +1,8 @@
 .form {
 	position: relative;
-	max-width: toRem(800);
+	@media (min-width: em(601)) {
+		max-width: toRem(800);
+	}
 	&::before {
 		content: "";
 		position: absolute;
@@ -66,8 +68,11 @@
 
 	&__error {
 		position: relative;
-		top: toRem(3);
+		top: toRem(5);
 		color: red;
+		@media (max-width: $mobileSmall) {
+			font-size: toRem(13);
+		}
 	}
 
 	// .form__input
@@ -111,7 +116,7 @@
 	// .form__send
 
 	&__send {
-		margin-top: toRem(10);
+		margin-top: toRem(30);
 		width: 100%;
 		border: toRem(1) solid green;
 		padding: toRem(10);
@@ -178,7 +183,7 @@ textarea {
 }
 
 textarea.input {
-	resize: vertical;
+	resize: none;
 	padding: 0 toRem(15);
 	min-height: toRem(100);
 }
