@@ -75,12 +75,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			form ? form.classList.add('_sending') : null
 			// formPopup ? formPopup.classList.add('_sending') : null
 			try {
-
 				const response = await axios.post('../files/sendmail/sendmail.php', formData)
-				for (let input of inputsArr) {
-					input.value = ''
-				}
 				form ? form.classList.remove('_sending') : null
+				const formLine = form.querySelector('.form__line')
+				formLine.classList.remove('_input-active');
 				// formPopup ? formPopup.classList.remove('_sending') : null
 
 				// if (suceessSelectorPopup) {
