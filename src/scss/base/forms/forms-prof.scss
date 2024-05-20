@@ -194,3 +194,27 @@ textarea.input {
 		pointer-events: none;
 	}
 }
+
+@keyframes shake-horizontal {
+	10%,
+	30%,
+	50%,
+	70% {
+		transform: translateX(-10px);
+	}
+
+	20%,
+	40%,
+	60% {
+		transform: translateX(10px);
+	}
+
+	80% {
+		-webkit-transform: translateX(8px);
+		transform: translateX(8px);
+	}
+	90% {
+		-webkit-transform: translateX(8px);
+		transform: translateX(-8px);
+	}
+}
