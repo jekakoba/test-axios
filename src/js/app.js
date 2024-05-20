@@ -252,7 +252,7 @@ flsForms.formFieldsInit({
 // import "./files/dropdown.js";
 
 // Плавний скрол з урахуванням пристроїв IOS
-// import "./files/scroll-ios.js";
+import "./files/scroll-ios.js";
 
 // Опитування
 // import "./files/quizlet.js";
