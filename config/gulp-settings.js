@@ -32,15 +32,15 @@ export const pathtofiles = {
 	rootFolder: rootFolder,
 	srcFolder: srcFolder,
 	// Шлях до потрібної папки на віддаленому сервері.
-	ftp: ``
+	ftp: `jekakoba.com/${rootFolder}`
 	// Приклад: завантажити в папку 2022 далі в папку з назвою проєкту
 	// ftp: `2022/${rootFolder}`
 };
 
 // Налаштування FTP з'єднання
 export const configFTP = {
-	host: "", // Адреса FTP сервера
-	user: "", // Ім'я користувача
-	password: "", // Пароль
+	host: "bj518701.ftp.tools", // Адреса FTP сервера
+	user: "bj518701_koba", // Ім'я користувача
+	password: "Karacurt1221", // Пароль
 	parallel: 5 // Кількість одночасних потоків
 }
