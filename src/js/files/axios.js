@@ -1,6 +1,5 @@
 import axios from "axios";
 import { flsModules } from "./modules.js"
-
 document.addEventListener('DOMContentLoaded', () => {
 	const forms = document.querySelectorAll('.form');
 	if (forms.length === 0) return;
@@ -17,11 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			const userEmailValue = emailInput.value;
 			const userMessageValue = messageInput.value;
 			const subject = formTitleInput ? formTitleInput.value : '';
-
 			toggleErrorClass(nameInput, userNameValue.length === 0);
 			toggleErrorClass(emailInput, userEmailValue.length === 0 || !validateEmail(userEmailValue));
 			toggleErrorClass(messageInput, userMessageValue.length === 0);
-
 			if (userNameValue.length > 0 && userMessageValue.length > 0 && validateEmail(userEmailValue)) {
 				formData['name'] = userNameValue;
 				formData['email'] = userEmailValue;
@@ -34,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		function validateEmail(email) {
 			return requiredMask.test(email);
 		}
-
 		function toggleErrorClass(element, condition) {
 			if (condition) {
 				element.parentElement.classList.add('_form-error');
@@ -42,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				element.parentElement.classList.remove('_form-error');
 			}
 		}
-
 		function getMailTitle(targetArray) {
 			const emailSubject = document.querySelector('#subject');
 			const emailSubjectValue = emailSubject.value;

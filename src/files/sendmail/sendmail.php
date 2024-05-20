@@ -18,21 +18,25 @@
 	$mail->Username   = 'endlesss2k2k@gmail.com';   //      leadgenerator1001@gmail.com
     $mail->Password   = 'akxmvdlvdkfhzmmm';    //        ptltiwlyrteghsth
 
-	$mail_title = $_POST['mail-title'];
-	// <input data-mail-title-footer name="mail-title" type="hidden" value="GOT INTERESTED? CONTACT US!"> — приклад підзаголовку листа у value
-	$mail_subject = $_POST['subject'];
-	// <input id="subject" name="subject" type="hidden" value="Fractional CMO"> — приклад заголовку листа у value
+	$mail_title = htmlspecialchars($_POST['mail-title'], ENT_QUOTES, 'UTF-8');
+	$mail_subject = htmlspecialchars($_POST['subject'], ENT_QUOTES, 'UTF-8');
 
 	
 	$html .= '<h3>' . $mail_title . '</h3>';
 	$html .= '<ul>'; 
 	$isValidate = true;
+
+	$email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+	if ($email === false) {
+    	$isValidate = false;
+	}
+	
 	foreach ($_POST as $key => $value) {
-		if($key != 'subject' && $key != 'mail-title'){
-			$decoded_value = urldecode($value);
-			$formatted_key = str_replace('_', ' ', $key);
+		if ($key !== 'subject' && $key !== 'mail-title') {
+			$decoded_value = htmlspecialchars(urldecode($value), ENT_QUOTES, 'UTF-8');
+			$formatted_key = str_replace('_', ' ', htmlspecialchars($key, ENT_QUOTES, 'UTF-8'));
 			$html .= '<li><strong>' . $formatted_key . ':</strong> ' . $decoded_value . '</li>';
-			if($value === ''){
+			if ($value === '') {
 				$isValidate = false;
 			}
 		}
