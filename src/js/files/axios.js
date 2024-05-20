@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				getMailTitle(formData, form);
 				chatSubmit(formData, form, [nameInput, emailInput, messageInput]);
 
-			} else {
-				createErrorMessage(form)
 			}
 		}
 
@@ -59,8 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		function toggleErrorClass(element, condition) {
 			if (condition) {
 				element.parentElement.classList.add('_form-error');
+				createErrorMessage(form)
 			} else {
 				element.parentElement.classList.remove('_form-error');
+				const errorBlocks = form.querySelectorAll('.form__error');
+				errorBlocks.forEach(block => block.remove());
 			}
 		}
 
