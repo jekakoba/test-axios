@@ -5,17 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	const forms = document.querySelectorAll('.form')
 	if (forms.length === 0) return
 	forms.forEach(form => {
-		// Заголовки форм
-		const firstFormTitle = form.querySelector('[data-first-form-title]')
-		const secondFormTitle = form.querySelector('[data-second-form-title]')
-
 		// Перша форма
+		const firstFormTitle = form.querySelector('[data-first-form-title]')
 		const firstFormName = form.querySelector('[data-first-form-name]')
 		const firstFormEmail = form.querySelector('[data-first-form-email]')
 		const firstFormMessage = form.querySelector('[data-first-form-message]')
 		const firstFormSend = form.querySelector('[data-first-form-send]')
 
 		// Друга  форма
+		const secondFormTitle = form.querySelector('[data-second-form-title]')
 		const secondFormName = form.querySelector('[data-second-form-name]')
 		const secondFormEmail = form.querySelector('[data-second-form-email]')
 		const secondFormMessage = form.querySelector('[data-second-form-message]')
@@ -57,13 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
 				const userSecondMessageValue = secondFormMessage.value;
 				const subjectSecondForm = secondFormTitle ? secondFormTitle.value : '';
 
-				toggleErrorClass(firstFormName, userSecondNameValue.length === 0);
-				toggleErrorClass(firstFormEmail, userSecondEmailValue.length === 0 || !validateEmail(userSecondEmailValue));
-				toggleErrorClass(firstFormMessage, userSecondMessageValue.length === 0);
+				toggleErrorClass(secondFormName, userSecondNameValue.length === 0);
+				toggleErrorClass(secondFormEmail, userSecondEmailValue.length === 0 || !validateEmail(userSecondEmailValue));
+				toggleErrorClass(secondFormMessage, userSecondMessageValue.length === 0);
 				if (userSecondNameValue.length > 0 && userSecondMessageValue.length > 0 && validateEmail(userSecondEmailValue)) {
 					dataSecondForm['name'] = userSecondNameValue;
-					dataSecondForm['email'] = userSecondMessageValue;
-					dataSecondForm['message'] = userFirstMessageValue;
+					dataSecondForm['email'] = userSecondEmailValue;
+					dataSecondForm['message'] = userSecondMessageValue;
 					dataSecondForm['mail-title'] = subjectSecondForm;
 					getMailTitle(dataSecondForm);
 					chatSubmit(dataSecondForm, [secondFormName, secondFormEmail, secondFormMessage]);
